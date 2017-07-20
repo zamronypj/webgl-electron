@@ -4,7 +4,7 @@
 /**
  * Utility for calculating view frustum and perspective matrix
  *
- * @author zamroni <zamroni@dominopos.com>
+ * @author Zamrony P. Juhara <zamronypj@yahoo.com>
  */
 
 var Matrix4f = require('./matrix4f.js');

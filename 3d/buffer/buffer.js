@@ -3,7 +3,7 @@
 
 /**
  * Thin wrapper for OpenGL buffer creation/management
- * @author zamroni <zamroni@dominopos.com>
+ * @author Zamrony P. Juhara <zamronypj@yahoo.com>
  */
 var Buffer = (function(){
     /**
