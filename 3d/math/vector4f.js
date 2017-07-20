@@ -1,0 +1,176 @@
+
+'use strict';
+
+/**
+ * Thin wrapper for vector 1x4 for 3D transformation
+ */
+var Vector4f = (function(){
+
+    /**
+     * hold matrix elements
+     * @var float[4]
+     */
+    var elements;
+
+    /**
+     * Constructor
+     * @param float[4][4] vec
+     */
+    function Vector4fClass(vec) {
+        if (typeof vec !== 'undefined') {
+            elements = vec;
+        }
+    };
+
+
+    /**
+     * Get vector content
+     * @return float[4]
+     */
+    Vector4fClass.prototype.vec = function () {
+        return elements;
+    };
+
+    /**
+     * set vector content
+     * @param float[4] vec
+     * @return this
+     */
+    Vector4fClass.prototype.setVec = function (vec) {
+        elements = vec;
+        return this
+    };
+
+
+    /**
+     * Initialize zero vector
+     * @return this
+     */
+    Vector4fClass.prototype.zero = function () {
+        elements = [ 0.0, 0.0, 0.0, 0.0 ];
+        return this;
+    };
+
+    /**
+     * add two vector 1x4
+     * @param float[4] vecA
+     * @param float[4] vecB
+     * @param float[4] vecResult
+     * @return float[4] vecResult
+     */
+    var addVec4 = function (vecA, vecB, vecResult) {
+        var i;
+        for (i = 0; i < 4; i++) {
+            vecResult[i] = vecA[i] + vecB[i];
+        }
+        return vecResult;
+    };
+
+    /**
+     * add this vector with other vector
+     * @param Vector4f vec
+     * @return Vector4f resultVec
+     */
+    Vector4fClass.prototype.add = function (vec) {
+        var resultVec = new Vector4f();
+        var vecResult = resultMat.zero().vec();
+        var vecA = elements;
+        var vecB = vec.vec();
+        vecResult = addVec4(vecA, vecB, vecResult);
+        resultVec.setVec(vecResult);
+        return resultVec;
+    };
+
+    /**
+     * subtract two vector 1x4
+     * @param float[4] vecA
+     * @param float[4] vecB
+     * @param float[4] vecResult
+     * @return float[4] vecResult
+     */
+    var subVec4 = function (vecA, vecB, vecResult) {
+        var i;
+        for (i = 0; i < 4; i++) {
+            vecResult[i] = vecA[i] - vecB[i];
+        }
+        return vecResult;
+    };
+
+    /**
+     * subtract this vector from other vector
+     * @param Vector4f vec
+     * @return Vector4f resultVec
+     */
+    Vector4fClass.prototype.sub = function (vec) {
+        var resultVec = new Vector4f();
+        var vecResult = resultVec.zero().vec();
+        var vecA = elements;
+        var vecB = vec.vec();
+        vecResult = subVec4(vecA, vecB, vecResult);
+        resultVec.setVec(vecResult);
+        return resultVec;
+    };
+
+    /**
+     * multiply two vector 1x4
+     * @param float[4] vecA
+     * @param float[4] vecB
+     * @param float[4] vecResult
+     * @return float[4] vecResult
+     */
+    var mulVec4 = function (vecA, vecB, vecResult) {
+        var i;
+        for (i = 0; i < 4; i++) {
+            vecResult[i] = vecA[i] * vecB[i];
+        }
+        return vecResult;
+    };
+
+    /**
+     * multiply this vector with other vector
+     * @param Vector4f vec
+     * @return Vector4f resultVec
+     */
+    Vector4fClass.prototype.mul = function (vec) {
+        var resultVec = new Vector4f();
+        var vecResult = resultVec.zero().vec();
+        var vecA = elements;
+        var vecB = vec.vec();
+        vecResult = mulVec4(vecA, vecB, vecResult);
+        resultVec.setVec(vecResult);
+        return resultVec;
+    };
+
+    /**
+     * multiply vector 4x1 with a scalar value
+     * @param float[4] vecA
+     * @param float scalar
+     * @param float[4] vecResult
+     * @return float[4] vecResult
+     */
+    var mulScalarVec4 = function (vecA, scalar, vecResult) {
+        var i;
+        for (i = 0; i < 4; i++) {
+            vecResult[i] = vecA[i] * scalar;
+        }
+        return vecResult;
+    };
+
+    /**
+     * multiply this vector with scalar value
+     * @param float scalar
+     * @return Vector4f resultVec
+     */
+    Vector4fClass.prototype.scale = function (scalar) {
+        var resultVec = new Vector4f();
+        var vecResult = resultVec.zero().mat();
+        var vecA = elements;
+        vecResult = mulScalarVec4(vecA, scalar, vecResult);
+        resultVec.setVec(vecResult);
+        return resultVec;
+    };
+
+    return Vector4fClass;
+}());
+
+module.exports = Vector4f;

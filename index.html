@@ -5,15 +5,34 @@
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+    <canvas id="glCanvas" width="640" height="480">Your browser doesn't appear to support the <code>&lt;canvas&gt;</code> element.</canvas>
+    <script id="shader-fs" type="x-shader/x-fragment">
+      void main(void) {
+        gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
+      }
+    </script>
+    <script id="shader-vs" type="x-shader/x-vertex">
+      attribute vec3 aVertexPosition;
 
-  <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
-  </script>
+      uniform mat4 uMVMatrix;
+      uniform mat4 uPMatrix;
+
+      void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+      }
+    </script>
+    <script>
+       var canvas = document.getElementById('glCanvas');
+       var vertexShader = document.getElementById('shader-vs');
+       var fragmentShader = document.getElementById('shader-fs');
+
+       const Renderer = require('./renderer.js');
+       var renderer = new Renderer({
+           'canvasElement' : canvas,
+           'vertexShader' : vertexShader.text,
+           'fragmentShader' : fragmentShader.text,
+       });
+       renderer.render();
+    </script>
+  </body>
 </html>
