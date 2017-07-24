@@ -13,7 +13,8 @@ var GLContext = (function() {
      */
     function GLContextClass(canvasObj) {
         if (canvasObj) {
-            glInstance = canvasObj.getContext('webgl') || canvasObj.getContext('experimental-webgl');
+            glInstance = canvasObj.getContext('webgl') || canvasObj.getContext('experimental-webgl') ||
+                         canvasObj.getContext('moz-webgl') || canvasObj.getContext('webkit-3d');
         }
     };
 
