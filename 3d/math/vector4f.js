@@ -163,7 +163,7 @@ var Vector4f = (function(){
      */
     Vector4fClass.prototype.scale = function (scalar) {
         var resultVec = new Vector4f();
-        var vecResult = resultVec.zero().mat();
+        var vecResult = resultVec.zero().vec();
         var vecA = elements;
         vecResult = mulScalarVec4(vecA, scalar, vecResult);
         resultVec.setVec(vecResult);
@@ -179,10 +179,27 @@ var Vector4f = (function(){
         var dotResult = 0.0, i;
         var vecA = elements;
         var vecB = vec.vec();
-        for (i=0; i<4; i++) {
-            dotResult += vecA[i] * vecB[i];
-        }
+        dotResult += vecA[0] * vecB[0];
+        dotResult += vecA[1] * vecB[1];
+        dotResult += vecA[2] * vecB[2];
         return dotResult;
+    };
+
+    /**
+     * cross product of this vector with other vector
+     * @param Vector4f vec
+     * @return {Vector4f} vector perpendicular to this vector to vec
+     */
+    Vector4fClass.prototype.cross = function (vec) {
+        var resultVec = new Vector4f();
+        var vecResult = resultVec.zero().mat();
+        var vecA = elements;
+        var vecB = vec.vec();
+        vecResult[0] = vecA[1]*vecB[2] - vecA[2] * vecB[1];
+        vecResult[1] = vecA[2]*vecB[0] - vecA[0] * vecB[2];
+        vecResult[2] = vecA[0]*vecB[1] - vecA[1] * vecB[0];
+        vecResult[3] = 0.0;
+        return resultVec;
     };
 
     return Vector4fClass;
