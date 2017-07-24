@@ -72,13 +72,9 @@ var Vector4f = (function(){
      * @return Vector4f resultVec
      */
     Vector4fClass.prototype.add = function (vec) {
-        var resultVec = new Vector4f();
-        var vecResult = resultMat.zero().vec();
         var vecA = elements;
         var vecB = vec.vec();
-        vecResult = addVec4(vecA, vecB, vecResult);
-        resultVec.setVec(vecResult);
-        return resultVec;
+        return new Vector4f(addVec4(vecA, vecB, [0.0, 0.0, 0.0, 0.0]));
     };
 
     /**
@@ -102,13 +98,9 @@ var Vector4f = (function(){
      * @return Vector4f resultVec
      */
     Vector4fClass.prototype.sub = function (vec) {
-        var resultVec = new Vector4f();
-        var vecResult = resultVec.zero().vec();
         var vecA = elements;
         var vecB = vec.vec();
-        vecResult = subVec4(vecA, vecB, vecResult);
-        resultVec.setVec(vecResult);
-        return resultVec;
+        return new Vector4f(subVec4(vecA, vecB, [0.0, 0.0, 0.0, 0.0]));
     };
 
     /**
@@ -132,13 +124,9 @@ var Vector4f = (function(){
      * @return Vector4f resultVec
      */
     Vector4fClass.prototype.mul = function (vec) {
-        var resultVec = new Vector4f();
-        var vecResult = resultVec.zero().vec();
         var vecA = elements;
         var vecB = vec.vec();
-        vecResult = mulVec4(vecA, vecB, vecResult);
-        resultVec.setVec(vecResult);
-        return resultVec;
+        return new Vector4f(mulVec4(vecA, vecB, [0.0, 0.0, 0.0, 0.0]));
     };
 
     /**
@@ -162,12 +150,8 @@ var Vector4f = (function(){
      * @return Vector4f resultVec
      */
     Vector4fClass.prototype.scale = function (scalar) {
-        var resultVec = new Vector4f();
-        var vecResult = resultVec.zero().vec();
         var vecA = elements;
-        vecResult = mulScalarVec4(vecA, scalar, vecResult);
-        resultVec.setVec(vecResult);
-        return resultVec;
+        return new Vector4f(mulScalarVec4(vecA, scalar, [0.0, 0.0, 0.0, 0.0]));
     };
 
     /**
@@ -176,13 +160,28 @@ var Vector4f = (function(){
      * @return {float} dot product
      */
     Vector4fClass.prototype.dot = function (vec) {
-        var dotResult = 0.0, i;
+        var dotResult;
         var vecA = elements;
         var vecB = vec.vec();
-        dotResult += vecA[0] * vecB[0];
+        dotResult  = vecA[0] * vecB[0];
         dotResult += vecA[1] * vecB[1];
         dotResult += vecA[2] * vecB[2];
         return dotResult;
+    };
+
+    /**
+     * cross product of two vectors
+     * @param float[4] vecA
+     * @param float[4] vecB
+     * @param float[4] vecResult
+     * @return float[4] vecResult
+     */
+    var crossVec4 = function (vecA, vecB, vecResult) {
+        vecResult[0] = vecA[1] * vecB[2] - vecA[2] * vecB[1];
+        vecResult[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
+        vecResult[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
+        vecResult[3] = 0.0;
+        return vecResult;
     };
 
     /**
@@ -191,15 +190,9 @@ var Vector4f = (function(){
      * @return {Vector4f} vector perpendicular to this vector to vec
      */
     Vector4fClass.prototype.cross = function (vec) {
-        var resultVec = new Vector4f();
-        var vecResult = resultVec.zero().mat();
         var vecA = elements;
         var vecB = vec.vec();
-        vecResult[0] = vecA[1]*vecB[2] - vecA[2] * vecB[1];
-        vecResult[1] = vecA[2]*vecB[0] - vecA[0] * vecB[2];
-        vecResult[2] = vecA[0]*vecB[1] - vecA[1] * vecB[0];
-        vecResult[3] = 0.0;
-        return resultVec;
+        return new Vector4f(crossVec4(vecA, vecB, [0.0, 0.0, 0.0, 0.0]));
     };
 
     return Vector4fClass;
