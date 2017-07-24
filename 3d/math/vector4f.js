@@ -170,7 +170,23 @@ var Vector4f = (function(){
         return resultVec;
     };
 
+    /**
+     * dot product of this vector with other vector
+     * @param Vector4f vec
+     * @return {float} dot product
+     */
+    Vector4fClass.prototype.dot = function (vec) {
+        var dotResult = 0.0, i;
+        var vecA = elements;
+        var vecB = vec.vec();
+        for (i=0; i<4; i++) {
+            dotResult += vecA[i] * vecB[i];
+        }
+        return dotResult;
+    };
+
     return Vector4fClass;
+
 }());
 
 module.exports = Vector4f;
