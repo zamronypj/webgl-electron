@@ -61,3 +61,5 @@ var Viewport = (function(){
     return ViewportClass;
 
 }());
+
+module.exports = Viewport;

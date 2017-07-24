@@ -41,6 +41,15 @@ var Buffer = (function(){
     };
 
     /**
+     * unbind current buffer object with buffer type
+     * @return {Buffer} self
+     */
+    BufferClass.prototype.unbindBuffer = function () {
+        gl.bindBuffer(this.getBufferType(), null);
+        return this;
+    };
+
+    /**
      * write data to buffer
      * @param  {object} data  data to write
      * @param  {int} usage data usage
