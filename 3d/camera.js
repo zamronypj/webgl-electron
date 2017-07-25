@@ -6,10 +6,10 @@
  * @author Zamrony P. Juhara <zamronypj@yahoo.com>
  */
 
-var Vector4f = require('./math/vector4f.js');
-var Matrix4f = require('./math/matrix4f.js');
-
 var Camera = (function(){
+    var Vector4f = require('./math/vector4f.js');
+    var Matrix4f = require('./math/matrix4f.js');
+
     /**
      * Hold OpenGL context
      * @var object
