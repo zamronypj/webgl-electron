@@ -22,7 +22,6 @@ var Vector4f = (function(){
         }
     };
 
-
     /**
      * Get vector content
      * @return float[4]
@@ -38,9 +37,8 @@ var Vector4f = (function(){
      */
     Vector4fClass.prototype.setVec = function (vec) {
         elements = vec;
-        return this
+        return this;
     };
-
 
     /**
      * Initialize zero vector

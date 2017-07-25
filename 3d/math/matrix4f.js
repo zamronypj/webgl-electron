@@ -26,7 +26,6 @@ var Matrix4f = (function(){
         }
     };
 
-
     /**
      * convert matrix float[4][4] to float[16]
      * @return float[16]
