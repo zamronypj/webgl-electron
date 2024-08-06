@@ -14,7 +14,12 @@ let mainWindow;
 function createWindow () {
     // Create the browser window.
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-    mainWindow = new BrowserWindow({width, height});
+    mainWindow = new BrowserWindow({width, height,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false}
+        });
+    mainWindow.webContents.openDevTools()
 
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
